@@ -7,8 +7,8 @@ package ctl;
  */
 public class Until extends PathFormula {
 
-	StateFormula left;
-	StateFormula right;
+	public StateFormula left;
+	public StateFormula right;
 	
 	/**
 	 * Initializes the {@code left} and {@code right} sub-formulas to the state

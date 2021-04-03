@@ -8,7 +8,7 @@ package ctl;
 
 public class Next extends PathFormula {
 
-	StateFormula inner;	// the inner StateFormula that this Next Pathformula refers to
+	public StateFormula inner;	// the inner StateFormula that this Next Pathformula refers to
 	
 	/**
 	 * Initializes the {@code inner} formula to the <i>StateFormula</i>

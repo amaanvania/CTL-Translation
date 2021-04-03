@@ -8,8 +8,8 @@ package ctl;
 
 public class And extends StateFormula {
 
-	StateFormula left;
-	StateFormula right;
+	public StateFormula left;
+	public StateFormula right;
 	
 	/**
 	 * Initializes the {@code left} and {@code right} sub-formulas to the state
