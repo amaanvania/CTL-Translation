@@ -14,7 +14,7 @@ public class PositiveTranslation {
 
     public static void main(String[] args) {
         try {
-            String input1 = "!A(java.lang.Exception U java.lang.Exception)";
+            String input1 = "!(!Java.lang.Exception && !Java.lang.Runtime)";
             Formula formula1 = getFormula(input1);
 
             Formula tester = formula1.positiveNormalForm();

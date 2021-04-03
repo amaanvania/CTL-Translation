@@ -72,16 +72,19 @@ public class Not extends StateFormula {
 
 	@Override
 	public StateFormula positiveNormalForm() {
-		if(inner instanceof True){
+		if(inner instanceof True){ //works
 			return new False();
-		}else if(inner instanceof Not){
-			return inner.positiveNormalForm();
-		}else if(inner instanceof And){
+		} if(inner instanceof False){
+			return new True();
+		} if(inner instanceof Not){ //works
+			Not curr = (Not) inner;
+			return curr.inner.positiveNormalForm();
+		} if(inner instanceof And){
 
 			And curr = (And) inner;
 			return new Or(new Not(curr.left.positiveNormalForm()), new Not(curr.right.positiveNormalForm()));
 
-		}else if(inner instanceof ForAll){
+		} if(inner instanceof ForAll){
 			ForAll curr = (ForAll) inner;
 
 			if(curr.getInner() != null){
@@ -103,7 +106,7 @@ public class Not extends StateFormula {
 
 				}
 			}
-		}else if(inner instanceof Exists){
+		} if(inner instanceof Exists){
 			Exists curr = (Exists) inner;
 
 			if(curr.getInner() != null){
