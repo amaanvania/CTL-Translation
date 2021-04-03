@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import ctl.Formula;
 import ctl.Generator;
+import ctlform.PositiveNormalForm;
 import ctlform.PositiveTranslation;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -31,7 +32,7 @@ class PositiveNormalFormTest {
 		String input1 = "! ! True";
 		Formula formula1 = getFormula(input1);
 
-		Formula tester = formula1.positiveNormalForm();
+		Formula tester = PositiveNormalForm.translate(formula1);
 
 		assertEquals("true", tester.toString());
 	}
@@ -41,7 +42,7 @@ class PositiveNormalFormTest {
 		String input1 = "! True";
 		Formula formula1 = getFormula(input1);
 
-		Formula tester = formula1.positiveNormalForm();
+		Formula tester = PositiveNormalForm.translate(formula1);
 
 		assertEquals("false", tester.toString());
 	}
@@ -51,7 +52,7 @@ class PositiveNormalFormTest {
 		String input1 = "! false";
 		Formula formula1 = getFormula(input1);
 
-		Formula tester = formula1.positiveNormalForm();
+		Formula tester = PositiveNormalForm.translate(formula1);
 
 		assertEquals("true", tester.toString());
 	}
@@ -60,7 +61,7 @@ class PositiveNormalFormTest {
 		String input1 = "!(!Java.lang.Exception && !Java.lang.Runtime)";
 		Formula formula1 = getFormula(input1);
 
-		Formula tester = formula1.positiveNormalForm();
+		Formula tester = PositiveNormalForm.translate(formula1);
 
 		System.out.println(tester.toString());
 	}
@@ -70,7 +71,7 @@ class PositiveNormalFormTest {
 		String input1 = "!A X True";
 		Formula formula1 = getFormula(input1);
 
-		Formula tester = formula1.positiveNormalForm();
+		Formula tester = PositiveNormalForm.translate(formula1);
 
 		System.out.println(tester.toString());
 	}
@@ -80,7 +81,7 @@ class PositiveNormalFormTest {
 		String input1 = "!E X True";
 		Formula formula1 = getFormula(input1);
 
-		Formula tester = formula1.positiveNormalForm();
+		Formula tester = PositiveNormalForm.translate(formula1);
 
 		System.out.println(tester.toString());
 	}
@@ -91,7 +92,7 @@ class PositiveNormalFormTest {
 		String input1 = "!E(java.lang.Exception U java.lang.Exception)";
 		Formula formula1 = getFormula(input1);
 
-		Formula tester = formula1.positiveNormalForm();
+		Formula tester = PositiveNormalForm.translate(formula1);
 
 		System.out.println(tester.toString());
 	}
@@ -101,7 +102,7 @@ class PositiveNormalFormTest {
 	void testTranslatedNegatedForAllUntil(){
 		String input1 = "!A(java.lang.Exception U java.lang.Exception)";
 		Formula formula1 = getFormula(input1);
-		Formula tester = formula1.positiveNormalForm();
+		Formula tester = PositiveNormalForm.translate(formula1);
 		System.out.println(tester.toString());
 	}
 

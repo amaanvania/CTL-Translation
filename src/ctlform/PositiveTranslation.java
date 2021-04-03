@@ -8,8 +8,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import parser.CTLLexer;
 import parser.CTLParser;
 
-import java.text.Normalizer;
-
 public class PositiveTranslation {
 
     public static void main(String[] args) {
@@ -17,7 +15,7 @@ public class PositiveTranslation {
             String input1 = "!(!Java.lang.Exception && !Java.lang.Runtime)";
             Formula formula1 = getFormula(input1);
 
-            Formula tester = formula1.positiveNormalForm();
+            Formula tester = PositiveNormalForm.translateUntilComplete(formula1);
 
             System.out.println(tester.toString());
 /*            Boolean b1 = isNegatedExistsUntil(formula1);

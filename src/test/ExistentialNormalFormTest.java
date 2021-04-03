@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
 import ctl.Generator;
+import ctlform.ExistentialNormalForm;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -32,7 +33,7 @@ class ExistentialNormalFormTest {
 	void testTranslatedForAllNext() {
 		String in = "AX(java.lang.Error)";
 		Formula formula = getFormula(in);
-		Formula g = formula.existentialNormalForm();
+		Formula g = ExistentialNormalForm.translate(formula);
 
 		System.out.println(g.toString());
 	}
@@ -41,7 +42,7 @@ class ExistentialNormalFormTest {
 	void testTranslatedForAllUntil() {
 		String in = "A (java.lang.Exception U java.lang.RuntimeException)";
 		Formula formula = getFormula(in);
-		Formula g = formula.existentialNormalForm();
+		Formula g = ExistentialNormalForm.translate(formula);
 
 		System.out.println(g.toString());
 	}

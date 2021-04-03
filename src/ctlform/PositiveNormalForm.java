@@ -1,22 +1,27 @@
 package ctlform;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-
 import ctl.Formula;
-import ctl.Generator;
-import parser.CTLLexer;
-import parser.CTLParser;
 
 public class PositiveNormalForm {
-	
-	public static Formula translate(Formula form) {		
-		String tempString = form.toString();
-		
-		Formula positiveNormalForm = PositiveTranslation.translation(tempString);
-		
-		return positiveNormalForm;
+
+	public static Formula translate(Formula form) {
+
+		Formula result = form.positiveNormalForm();
+
+		return result;
+	}
+
+
+	//translate until no more translations possible
+	public static Formula translateUntilComplete(Formula form) {
+
+		Formula result = form.positiveNormalForm();
+		for(int i = 0; i < 50; i++){
+			Formula tempResult = result.positiveNormalForm();
+			if(tempResult.equals(result)) break;
+			result = tempResult;
+		}
+		return result;
+
 	}
 }
