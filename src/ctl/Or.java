@@ -73,5 +73,14 @@ public class Or extends StateFormula {
 	public String toString() {
 		return "(" + left.toString() + ")||(" + right.toString() + ")";
 	}
-	
+
+	@Override
+	public StateFormula existentialNormalForm() {
+		return new Or(left.existentialNormalForm(), right.existentialNormalForm());
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		return new Or(left.positiveNormalForm(), right.positiveNormalForm());
+	}
 }

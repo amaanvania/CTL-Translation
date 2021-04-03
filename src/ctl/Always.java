@@ -64,4 +64,14 @@ public class Always extends PathFormula {
 	public String toString() {
 		return "G(" + inner.toString() + ")";
 	}
+
+	@Override
+	public PathFormula existentialNormalForm() {
+		return new Always(inner.existentialNormalForm());
+	}
+
+	@Override
+	public PathFormula positiveNormalForm() {
+		return new Always(inner.positiveNormalForm());
+	}
 }

@@ -73,5 +73,14 @@ public class Implies extends StateFormula {
 	public String toString() {
 		return "(" + left.toString() + ")->(" + right.toString() + ")";
 	}
-	
+
+	@Override
+	public StateFormula existentialNormalForm() {
+		return new Implies(left.existentialNormalForm(), right.existentialNormalForm());
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		return new Implies(left.positiveNormalForm(), right.positiveNormalForm());
+	}
 }

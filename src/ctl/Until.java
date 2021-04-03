@@ -72,5 +72,14 @@ public class Until extends PathFormula {
 	public String toString() {
 		return "(" + left.toString() + ")U(" + right.toString() + ")"; 
 	}
-	
+
+	@Override
+	public PathFormula existentialNormalForm() {
+		return new Until(left.existentialNormalForm(), right.existentialNormalForm());
+	}
+
+	@Override
+	public PathFormula positiveNormalForm() {
+		return new Until(left.positiveNormalForm(), right.positiveNormalForm());
+	}
 }

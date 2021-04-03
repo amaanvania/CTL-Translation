@@ -14,16 +14,20 @@ public class PositiveTranslation {
 
     public static void main(String[] args) {
         try {
-            String input1 = "!E(java.lang.Exception U java.lang.Exception)";
+            String input1 = "!A(java.lang.Exception U java.lang.Exception)";
             Formula formula1 = getFormula(input1);
-            Boolean b1 = isNegatedExistsUntil(formula1);
-            System.out.println(b1);
+
+            Formula tester = formula1.positiveNormalForm();
+
+            System.out.println(tester.toString());
+/*            Boolean b1 = isNegatedExistsUntil(formula1);
+          //  System.out.println(b1);
             if(b1){
                 Formula converted = convertNegatedExistsUntil(formula1);
                 formula1 = converted;
-            }
+            }*/
 
-            System.out.println(formula1.toString()); // 2nd line of output
+
 
 
 

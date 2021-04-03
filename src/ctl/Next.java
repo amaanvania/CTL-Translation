@@ -64,4 +64,14 @@ public class Next extends PathFormula {
 	public String toString() {
 		return "X(" + inner.toString() + ")";
 	}
+
+	@Override
+	public PathFormula existentialNormalForm() {
+		return new Next(inner.existentialNormalForm());
+	}
+
+	@Override
+	public PathFormula positiveNormalForm() {
+		return new Next(inner.positiveNormalForm());
+	}
 }

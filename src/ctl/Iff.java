@@ -74,4 +74,13 @@ public class Iff extends StateFormula {
 		return "(" + left.toString() + ")<->(" + right.toString() + ")";
 	}
 
+	@Override
+	public StateFormula existentialNormalForm() {
+		return new Iff(left.existentialNormalForm(), right.existentialNormalForm());
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		return new Iff(left.positiveNormalForm(), right.positiveNormalForm());
+	}
 }

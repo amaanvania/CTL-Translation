@@ -73,5 +73,37 @@ public class ForAll extends StateFormula {
 	public PathFormula getInner() {
 		return this.inner;
 	}
-	
+
+	@Override
+	public StateFormula existentialNormalForm() {
+		if(inner instanceof Next){
+			Next next = (Next) inner;
+			return new Not(new Exists(new Next(new Not((StateFormula) next.inner))));
+		}else if(inner instanceof Until){
+			Until current = (Until) inner;
+			StateFormula left = current.left;
+			StateFormula right = current.right;
+
+			//create new part
+			StateFormula leftInnerAnd = new And(new Not(left), new Not(right));
+			//inside of left bracket
+			Until leftUntil = new Until(new Not(right), leftInnerAnd);
+
+			//left part of and (Result)
+			StateFormula leftPart = new Not(new Exists(leftUntil));
+
+			//right part of and (Result)
+			StateFormula rightPart = new Not(new Exists(new Always(new Not(right))));
+
+			//combine for output
+			StateFormula result = new And(leftPart,rightPart);
+			return result;
+		}else
+		return new ForAll(inner.existentialNormalForm());
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		return new ForAll(inner.positiveNormalForm());
+	}
 }

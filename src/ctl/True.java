@@ -16,7 +16,7 @@ public class True extends StateFormula {
 	public True() {
 		this.formula = true;
 	}
-	
+
 	/**
 	 * Checks if this Formula is equal another object. The checks adhere to the
 	 * Equals contract in Java.
@@ -58,5 +58,18 @@ public class True extends StateFormula {
 	public String toString() {
 		return String.valueOf(formula);
 	}
+
+
+
+	@Override
+	public StateFormula existentialNormalForm() {
+		return this;
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		return this;
+	}
+
 
 }

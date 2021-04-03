@@ -62,6 +62,15 @@ public class AtomicProposition extends StateFormula {
 	public String toString() {
 		return this.formula;
 	}
-	
-	
+
+
+	@Override
+	public StateFormula existentialNormalForm() {
+		return this;
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		return this;
+	}
 }

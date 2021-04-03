@@ -13,5 +13,8 @@ public abstract class Formula {
 	public abstract boolean equals(Object obj);
 	public abstract int hashCode();
 	public abstract String toString();
+	public abstract Formula existentialNormalForm();
+	public abstract Formula positiveNormalForm();
+
 	
 }

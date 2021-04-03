@@ -64,5 +64,69 @@ public class Not extends StateFormula {
 	public String toString() {
 		return "!(" + inner.toString() + ")";
 	}
-	
+
+	@Override
+	public StateFormula existentialNormalForm() {
+		return new Not(inner.existentialNormalForm());
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		if(inner instanceof True){
+			return new False();
+		}else if(inner instanceof Not){
+			return inner.positiveNormalForm();
+		}else if(inner instanceof And){
+
+			And curr = (And) inner;
+			return new Or(new Not(curr.left.positiveNormalForm()), new Not(curr.right.positiveNormalForm()));
+
+		}else if(inner instanceof ForAll){
+			ForAll curr = (ForAll) inner;
+
+			if(curr.getInner() != null){
+
+				if(curr.getInner() instanceof Next){
+
+					Next last = (Next) curr.getInner();
+					return new Exists(new Next(new Not(last.inner.positiveNormalForm())));
+
+				}else if(curr.getInner() instanceof Until){
+
+					Until last = (Until) curr.getInner();
+					StateFormula left = last.left;
+					StateFormula right = last.right;
+
+					StateFormula leftInsideBracket = new And(left.positiveNormalForm(), new Not(right.positiveNormalForm()));
+					StateFormula rightInsideBracket = new And(new Not(left.positiveNormalForm()), new Not(right.positiveNormalForm()));
+					return new Exists(new WeakUntil(leftInsideBracket,rightInsideBracket));
+
+				}
+			}
+		}else if(inner instanceof Exists){
+			Exists curr = (Exists) inner;
+
+			if(curr.getInner() != null){
+
+				if(curr.getInner() instanceof Next){
+
+					Next last = (Next) curr.getInner();
+					return new ForAll(new Next(new Not(last.inner.positiveNormalForm())));
+
+				}else if(curr.getInner() instanceof Until){
+
+					Until last = (Until) curr.getInner();
+					StateFormula left = last.left;
+					StateFormula right = last.right;
+
+					StateFormula leftInsideBracket = new And(left.positiveNormalForm(), new Not(right.positiveNormalForm()));
+					StateFormula rightInsideBracket = new And(new Not(left.positiveNormalForm()), new Not(right.positiveNormalForm()));
+					return new ForAll(new WeakUntil(leftInsideBracket,rightInsideBracket));
+
+				}
+			}
+		}
+
+		return new Not(inner.positiveNormalForm());
+	}
 }

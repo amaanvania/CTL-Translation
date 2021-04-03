@@ -69,4 +69,13 @@ public class WeakUntil extends PathFormula {
     }
 
 
+    @Override
+    public PathFormula existentialNormalForm() {
+        return new WeakUntil(left.existentialNormalForm(), right.existentialNormalForm());
+    }
+
+    @Override
+    public PathFormula positiveNormalForm() {
+        return new WeakUntil(left.positiveNormalForm(), right.positiveNormalForm());
+    }
 }

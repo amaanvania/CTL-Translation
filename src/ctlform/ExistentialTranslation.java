@@ -24,32 +24,40 @@ public class ExistentialTranslation {
 			try {
 				String in = "(A (java.lang.Exception U java.lang.RuntimeException) && AX(java.lang.Error))";
 				Formula formula = getFormula(in);
+				Formula g = formula.existentialNormalForm();
+
+
+				System.out.println(g.toString());
 
 				if(formula instanceof And) {
 					Formula tempLeft = ((And) formula).left;
 
 					Formula tempRight = ((And) formula).right;
 
-					System.out.println(tempLeft.toString());
+				//	System.out.println(tempLeft.toString());
 
 
 					if(isForAllNext(tempRight)) {
-						System.out.println("Right is ForAllNext");
+					//	System.out.println("Right is ForAllNext");
 						Formula f = convertForAllNext(tempRight);
-						System.out.println(f.toString());
+					//	System.out.println(f.toString());
 						((And) formula).right = (StateFormula) f;
 					}
 
 					if(isForAllUntil(tempLeft)) {
-						System.out.println("Left is ForAllUntil");
+					//	System.out.println("Left is ForAllUntil");
 						Formula f = convertForAllUntil(tempLeft);
-						System.out.println(f.toString());
+						//System.out.println(f.toString());
 						((And) formula).left = (StateFormula) f;
 					}
 
 				}
 
 				System.out.println(formula.toString()); // 2nd line of output
+
+
+				//Boolean b = formula.toString().equals(g.toString());
+				//System.out.println(b);
 			} catch (IndexOutOfBoundsException e) {
 				System.out.println("Provide a command line argument");
 			}

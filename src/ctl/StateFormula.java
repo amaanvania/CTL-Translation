@@ -9,5 +9,7 @@ package ctl;
 public abstract class StateFormula extends Formula {
 
 	public StateFormula() {}
+	public abstract StateFormula existentialNormalForm();
+	public abstract StateFormula positiveNormalForm();
 	
 }

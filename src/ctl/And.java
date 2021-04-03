@@ -73,5 +73,14 @@ public class And extends StateFormula {
 	public String toString() {
 		return "(" + left.toString() + ")&&(" + right.toString() + ")";
 	}
-	
+
+	@Override
+	public StateFormula existentialNormalForm() {
+		return new And(left.existentialNormalForm(), right.existentialNormalForm());
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		return new And(left.positiveNormalForm(), right.positiveNormalForm());
+	}
 }

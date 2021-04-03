@@ -72,6 +72,15 @@ public class Exists extends StateFormula {
 	 */
 	public PathFormula getInner() {
 		return this.inner;
-	}		
+	}
 
+	@Override
+	public StateFormula existentialNormalForm() {
+		return new Exists(inner.existentialNormalForm());
+	}
+
+	@Override
+	public StateFormula positiveNormalForm() {
+		return new Exists(inner.positiveNormalForm());
+	}
 }

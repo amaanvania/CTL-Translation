@@ -52,4 +52,14 @@ public class Eventually extends PathFormula {
 	public String toString() {
 		return "F(" + inner.toString() + ")";
 	}
+
+	@Override
+	public PathFormula existentialNormalForm() {
+		return new Eventually(inner.existentialNormalForm());
+	}
+
+	@Override
+	public PathFormula positiveNormalForm() {
+		return new Eventually(inner.positiveNormalForm());
+	}
 }
