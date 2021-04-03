@@ -22,11 +22,7 @@ public class Translation {
 
 		public static void main(String[] args) {
 			try {
-				String in = "(A (java.lang.Exception U java.lang.Exception) && AX(java.lang.Exception))";
-				CTLParser temp = getParser(in);
-				//System.out.println(temp.toString());
-				ParseTree root = temp.root();
-				//System.out.println(root.toString());
+				String in = "(A (java.lang.Exception U java.lang.RuntimeException) && AX(java.lang.Error))";
 				Formula formula = getFormula(in);
 
 				if(formula instanceof And) {
@@ -84,7 +80,6 @@ public class Translation {
 				if(inner instanceof Next){
 					Formula next = ((Next) inner).inner;
 					if(next instanceof StateFormula) {
-						System.out.println("Worked");
 						return new Not(new Exists(new Next(new Not((StateFormula) next))));
 					}
 				}
@@ -97,12 +92,22 @@ public class Translation {
 				Formula inner = ((ForAll) f).getInner();
 
 				if(inner instanceof Until){
-					StateFormula left = ((Until) inner).left;
-					StateFormula right = ((Until) inner).left;
+					Until current = (Until) inner;
+					StateFormula left = current.left;
+					StateFormula right = current.right;
+					
+					//create new part
 					StateFormula leftInnerAnd = new And(new Not(left), new Not(right));
+					//inside of left bracket
 					Until leftUntil = new Until(new Not(right), leftInnerAnd);
+					
+					//left part of and (Result)
 					StateFormula leftPart = new Not(new Exists(leftUntil));
+					
+					//right part of and (Result)
 					StateFormula rightPart = new Not(new Exists(new Always(new Not(right))));
+					
+					//combine for output
 					Formula result = new And(leftPart,rightPart);
 					return result;
 				}
@@ -115,7 +120,6 @@ public class Translation {
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			CTLParser parser = new CTLParser(tokens);
 			ParseTree tree = parser.root();
-			//System.out.println(tree.toStringTree()); // 1st line of output
 			Generator generator = new Generator();
 			return generator.visit(tree);
 		}
