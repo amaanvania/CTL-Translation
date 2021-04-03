@@ -32,6 +32,37 @@ public class PositiveTranslation {
             System.out.println("Provide a command line argument");
         }
     }
+    
+    public static Formula translation(String in) {
+    	Formula f = getFormula(in);
+    	
+    	if (isNegatedForAllNext(f)) {
+    		
+    	}
+    	else if (isNotTrue(f)) {
+    		
+    	}
+    	else if (isDoubleNegation(f)) {
+    		
+    	}
+    	else if (isNegatedAnd(f)) {
+    		
+    	}
+    	else if (isNegatedForAllNext(f)) {
+    		convertNegatedForAllNext(f);
+    	}
+    	else if (isNegatedExistsNext(f)) {
+    		convertNegatedExistsNext(f);
+    	}
+    	else if (isNegatedForAllUntil(f)) {
+    		convertNegatedForAllUntil(f);
+    	}
+    	else if (isNegatedExistsUntil(f)) {
+    		convertNegatedExistsUntil(f);
+    	}
+    	
+    	return f;
+    }
 
     // ! True
     public static boolean isNotTrue(Formula f){

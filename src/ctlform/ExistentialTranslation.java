@@ -54,6 +54,19 @@ public class ExistentialTranslation {
 				System.out.println("Provide a command line argument");
 			}
 		}
+		
+		public static Formula translation(String in) {
+			Formula f = getFormula(in);
+			
+			if (isForAllNext(f)) {
+				convertForAllNext(f);
+			}
+			else if (isForAllUntil(f)) {
+				convertForAllUntil(f);
+			}
+			
+			return f;
+		}
 
 		public static boolean isForAllNext(Formula f){
 			if(f != null && f instanceof ForAll){
