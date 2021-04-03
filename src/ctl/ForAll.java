@@ -85,15 +85,15 @@ public class ForAll extends StateFormula {
 			StateFormula right = current.right;
 
 			//create new part
-			StateFormula leftInnerAnd = new And(new Not(left), new Not(right));
+			StateFormula leftInnerAnd = new And(new Not(left.existentialNormalForm()), new Not(right.existentialNormalForm()));
 			//inside of left bracket
-			Until leftUntil = new Until(new Not(right), leftInnerAnd);
+			Until leftUntil = new Until(new Not(right.existentialNormalForm()), leftInnerAnd);
 
 			//left part of and (Result)
 			StateFormula leftPart = new Not(new Exists(leftUntil));
 
 			//right part of and (Result)
-			StateFormula rightPart = new Not(new Exists(new Always(new Not(right))));
+			StateFormula rightPart = new Not(new Exists(new Always(new Not(right.existentialNormalForm()))));
 
 			//combine for output
 			StateFormula result = new And(leftPart,rightPart);
