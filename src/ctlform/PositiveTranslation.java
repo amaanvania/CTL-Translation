@@ -37,7 +37,7 @@ public class PositiveTranslation {
     public static boolean isNotTrue(Formula f){
         if(f != null && f instanceof Not){
             Not curr = (Not) f;
-            return (curr != null && curr.inner instanceof True);
+            return (curr.inner != null && curr.inner instanceof True);
         }
         return false;
     }
@@ -46,7 +46,7 @@ public class PositiveTranslation {
     public static boolean isDoubleNegation(Formula f){
         if(f != null && f instanceof Not){
             Not curr = (Not) f;
-            return (curr != null && curr.inner instanceof Not);
+            return (curr.inner != null && curr.inner instanceof Not);
         }
         return false;
     }
@@ -56,7 +56,7 @@ public class PositiveTranslation {
     public static boolean isNegatedAnd(Formula f){
         if(f != null && f instanceof Not){
             Not curr = (Not) f;
-            return (curr != null && curr.inner instanceof And);
+            return (curr.inner != null && curr.inner instanceof And);
         }
         return false;
     }
@@ -67,7 +67,7 @@ public class PositiveTranslation {
             Not curr = (Not) f;
             if(curr != null && curr.inner instanceof ForAll){
                 ForAll next = (ForAll) curr.inner;
-                return (next != null && next.getInner() instanceof Next);
+                return (next.getInner() != null && next.getInner() instanceof Next);
             }
         }
         return false;
@@ -77,9 +77,9 @@ public class PositiveTranslation {
     public static boolean isNegatedExistsNext(Formula f){
         if(f != null && f instanceof Not){
             Not curr = (Not) f;
-            if(curr != null && curr.inner instanceof Exists){
+            if(curr.inner != null && curr.inner instanceof Exists){
                 Exists next = (Exists) curr.inner;
-                return (next != null && next.getInner() instanceof Next);
+                return (next.getInner() != null && next.getInner() instanceof Next);
             }
         }
         return false;
@@ -91,7 +91,7 @@ public class PositiveTranslation {
             Not curr = (Not) f;
             if(curr != null && curr.inner instanceof ForAll){
                 ForAll next = (ForAll) curr.inner;
-                return (next != null && next.getInner() instanceof Until);
+                return (next.getInner() != null && next.getInner() instanceof Until);
             }
         }
         return false;
@@ -103,7 +103,7 @@ public class PositiveTranslation {
             Not curr = (Not) f;
             if(curr != null && curr.inner instanceof Exists){
                 Exists next = (Exists) curr.inner;
-                return (next != null && next.getInner() instanceof Until);
+                return (next.getInner() != null && next.getInner() instanceof Until);
             }
         }
         return false;
@@ -113,7 +113,7 @@ public class PositiveTranslation {
     public static Formula convertNotTrue(Formula f){
         if(f != null && f instanceof Not){
             Not curr = (Not) f;
-            if(curr != null && curr.inner instanceof True){
+            if(curr.inner != null && curr.inner instanceof True){
                 return new False();
             }
         }
@@ -125,7 +125,7 @@ public class PositiveTranslation {
             Not curr = (Not) f;
             if(curr != null && curr.inner instanceof ForAll){
                 ForAll next = (ForAll) curr.inner;
-                if (next != null && next.getInner() instanceof Next){
+                if (next.getInner() != null && next.getInner() instanceof Next){
                     Next last = (Next) next.getInner();
                     return new Exists(new Next(new Not(last.inner)));
                 }
@@ -137,9 +137,9 @@ public class PositiveTranslation {
     public static Formula convertNegatedExistsNext(Formula f){
         if(f != null && f instanceof Not){
             Not curr = (Not) f;
-            if(curr != null && curr.inner instanceof Exists){
+            if(curr.inner != null && curr.inner instanceof Exists){
                 Exists next = (Exists) curr.inner;
-                if(next != null && next.getInner() instanceof Next){
+                if(next.getInner() != null && next.getInner() instanceof Next){
                     Next last = (Next) next.getInner();
                     return new ForAll(new Next(new Not(last.inner)));
                 }
@@ -151,9 +151,9 @@ public class PositiveTranslation {
     public static Formula convertNegatedForAllUntil(Formula f){
         if(f != null && f instanceof Not){
             Not curr = (Not) f;
-            if(curr != null && curr.inner instanceof ForAll){
+            if(curr.inner != null && curr.inner instanceof ForAll){
                 ForAll next = (ForAll) curr.inner;
-                if (next != null && next.getInner() instanceof Until){
+                if (next.getInner() != null && next.getInner() instanceof Until){
                     Until last = (Until) next.getInner();
                     StateFormula left = last.left;
                     StateFormula right = last.right;
