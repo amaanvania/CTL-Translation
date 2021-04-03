@@ -31,7 +31,7 @@ public class WeakUntil extends PathFormula {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Until other = (Until) obj;
+        WeakUntil other = (WeakUntil) obj;
         if (left == null) {
             if (other.left != null)
                 return false;
@@ -46,7 +46,7 @@ public class WeakUntil extends PathFormula {
     }
 
     /**
-     * Returns the {@code hashCode} of this <i>Until</i> formula.
+     * Returns the {@code hashCode} of this <i>WeakUntil</i> formula.
      * @return	An integer value representing this object's {@code hashCode}
      */
     @Override
@@ -59,7 +59,7 @@ public class WeakUntil extends PathFormula {
     }
 
     /**
-     * Returns a string representation of this <i>Until</i> formula.
+     * Returns a string representation of this <i>WeakUntil</i> formula.
      * @return A pretty print version of this formula. The {@code left} and
      * 		   {@code right} sub-formulas are each enclosed in brackets.
      */

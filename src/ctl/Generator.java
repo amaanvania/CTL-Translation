@@ -223,18 +223,4 @@ public class Generator extends CTLBaseVisitor<Formula> {
 
 
 
-	/**
-	 * Visits the left and right subformula nodes of a ForAllUntil node in the parse tree.
-	 * @return	A {@code ForAll} instance of an {@code Until} instance containing the
-	 * 			left and right subformulas
-	 */
-/*	@Override
-	public Formula visitForAllWeakUntil(ForAllUntilContext ctx) {
-		StateFormula left = (StateFormula) visit(ctx.formula(0));
-		StateFormula right = (StateFormula) visit(ctx.formula(1));
-		return new ForAll(new WeakUntil(left, right));
-	}*/
-
-
-
 }
