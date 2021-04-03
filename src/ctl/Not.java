@@ -8,7 +8,7 @@ package ctl;
 
 public class Not extends StateFormula {
 
-	StateFormula inner;	// the inner StateFormula that is being negated
+	public StateFormula inner;	// the inner StateFormula that is being negated
 	
 	/**
 	 * Initializes the {@code inner} formula to the <i>StateFormula</i>

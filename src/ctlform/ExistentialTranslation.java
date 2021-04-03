@@ -18,7 +18,7 @@ import ctl.Until;
 import parser.CTLLexer;
 import parser.CTLParser;
 
-public class Translation {
+public class ExistentialTranslation {
 
 		public static void main(String[] args) {
 			try {
