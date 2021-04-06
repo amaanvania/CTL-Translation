@@ -5,7 +5,7 @@ import ctl.Formula;
 public class ExistentialNormalForm {
 	
 	public static Formula translate(Formula form) {
-		return translateUntilComplete(form);
+		return form.existentialNormalForm();
 	}
 
 
