@@ -78,25 +78,29 @@ public class ForAll extends StateFormula {
 	public StateFormula existentialNormalForm() {
 		if(inner instanceof Next){
 			Next next = (Next) inner;
-			return new Not(new Exists(new Next(new Not((StateFormula) next.inner))));
+			return new Not(new Exists(new Next(new Not(next.inner))));
 		}else if(inner instanceof Until){
+
 			Until current = (Until) inner;
 			StateFormula left = current.left;
 			StateFormula right = current.right;
 
+			StateFormula leftTranslated = left.existentialNormalForm();
+			StateFormula rightTranslated = right.existentialNormalForm();
 			//create new part
-			StateFormula leftInnerAnd = new And(new Not(left.existentialNormalForm()), new Not(right.existentialNormalForm()));
+			StateFormula leftInnerAnd = new And(new Not(leftTranslated), new Not(rightTranslated));
 			//inside of left bracket
-			Until leftUntil = new Until(new Not(right.existentialNormalForm()), leftInnerAnd);
+			Until leftUntil = new Until(new Not(rightTranslated), leftInnerAnd);
 
 			//left part of and (Result)
 			StateFormula leftPart = new Not(new Exists(leftUntil));
 
 			//right part of and (Result)
-			StateFormula rightPart = new Not(new Exists(new Always(new Not(right.existentialNormalForm()))));
+			StateFormula rightPart = new Not(new Exists(new Always(new Not(rightTranslated))));
 
 			//combine for output
 			StateFormula result = new And(leftPart,rightPart);
+
 			return result;
 		}else
 		return new ForAll(inner.existentialNormalForm());

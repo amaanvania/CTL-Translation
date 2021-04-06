@@ -6,9 +6,7 @@ public class PositiveNormalForm {
 
 	public static Formula translate(Formula form) {
 
-		Formula result = form.positiveNormalForm();
-
-		return result;
+		return translateUntilComplete(form);
 	}
 
 

@@ -100,8 +100,11 @@ public class Not extends StateFormula {
 					StateFormula left = last.left;
 					StateFormula right = last.right;
 
-					StateFormula leftInsideBracket = new And(left.positiveNormalForm(), new Not(right.positiveNormalForm()));
-					StateFormula rightInsideBracket = new And(new Not(left.positiveNormalForm()), new Not(right.positiveNormalForm()));
+					StateFormula leftTranslated = left.positiveNormalForm();
+					StateFormula rightTranslated = right.positiveNormalForm();
+
+					StateFormula leftInsideBracket = new And(leftTranslated, new Not(rightTranslated));
+					StateFormula rightInsideBracket = new And(new Not(leftTranslated), new Not(rightTranslated));
 					return new Exists(new WeakUntil(leftInsideBracket,rightInsideBracket));
 
 				}
@@ -122,8 +125,12 @@ public class Not extends StateFormula {
 					StateFormula left = last.left;
 					StateFormula right = last.right;
 
-					StateFormula leftInsideBracket = new And(left.positiveNormalForm(), new Not(right.positiveNormalForm()));
-					StateFormula rightInsideBracket = new And(new Not(left.positiveNormalForm()), new Not(right.positiveNormalForm()));
+
+					StateFormula leftTranslated = left.positiveNormalForm();
+					StateFormula rightTranslated = right.positiveNormalForm();
+
+					StateFormula leftInsideBracket = new And(leftTranslated, new Not(rightTranslated));
+					StateFormula rightInsideBracket = new And(new Not(leftTranslated), new Not(rightTranslated));
 					return new ForAll(new WeakUntil(leftInsideBracket,rightInsideBracket));
 
 				}

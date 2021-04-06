@@ -5,10 +5,7 @@ import ctl.Formula;
 public class ExistentialNormalForm {
 	
 	public static Formula translate(Formula form) {
-
-		Formula result = form.existentialNormalForm();
-
-		return result;
+		return form.existentialNormalForm();
 	}
 
 
