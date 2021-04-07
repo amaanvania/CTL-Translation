@@ -1,21 +1,19 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
-
+import ctl.Formula;
 import ctl.Generator;
 import ctlform.ExistentialNormalForm;
+import ctlform.RandomFormula;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.jupiter.api.Test;
-
-import ctl.And;
-import ctl.Formula;
 import parser.CTLLexer;
 import parser.CTLParser;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotSame;
 
 class ExistentialNormalFormTest {
 
@@ -30,6 +28,28 @@ class ExistentialNormalFormTest {
 	}
 
 	@Test
+	void testFormulaUnchanged(){
+
+		for(int i = 0; i < 10000; i++) {
+			Formula generated = RandomFormula.UntranslatableRandomFormula(10);
+			Formula translated = generated.existentialNormalForm();
+			assertEquals(translated.toString(), generated.toString());
+		}
+
+	}
+
+	@Test
+	void testFormulaChanged(){
+		for(int i = 0; i < 10000; i++) {
+			Formula generated = RandomFormula.translatablePNFRandomFormula(10);
+			Formula translated = generated.positiveNormalForm();
+			boolean isSame = translated.toString().equals(generated.toString());
+			assertEquals(false,isSame);
+		}
+	}
+
+
+	@Test
 	void testTranslatedForAllNext() {
 		String in = "AX(java.lang.Error)";
 		Formula formula = getFormula(in);
@@ -40,11 +60,16 @@ class ExistentialNormalFormTest {
 
 	@Test
 	void testTranslatedForAllUntil() {
-		String in = "A (java.lang.Exception U java.lang.RuntimeException)";
-		Formula formula = getFormula(in);
+		String in = "AX(java.lang.Error)";
+		String in1 = "A (" + in + "U " + in +")";
+		Formula formula = getFormula(in1);
 		Formula g = ExistentialNormalForm.translate(formula);
 
+		Formula gg = g.existentialNormalForm();
+
 		System.out.println(g.toString());
+
+		System.out.println(gg.toString());
 	}
 
 
